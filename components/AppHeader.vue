@@ -1,17 +1,34 @@
+<!-- components/AppHeader.vue -->
 <template>
   <header class="app-header">
     <div class="container">
       <div class="header-content">
         <NuxtLink to="/" class="logo">
-          <h1>CRUD App</h1>
+          <span class="logo-emoji">🍞</span>
+          <h1>BonBon</h1>
         </NuxtLink>
         
         <nav class="main-nav">
-          <NuxtLink to="/" class="nav-link">Home</NuxtLink>
-          <NuxtLink to="/categories" class="nav-link">Categories</NuxtLink>
-          <NuxtLink to="/users" class="nav-link">Users</NuxtLink>
-          <NuxtLink to="/products" class="nav-link">Products</NuxtLink>
-          <NuxtLink to="/about" class="nav-link">About</NuxtLink>
+          <NuxtLink to="/" class="nav-link">
+            <span class="nav-emoji">🏠</span>
+            Home
+          </NuxtLink>
+          <NuxtLink to="/categories" class="nav-link">
+            <span class="nav-emoji">📋</span>
+            Categories
+          </NuxtLink>
+          <NuxtLink to="/users" class="nav-link">
+            <span class="nav-emoji">👥</span>
+            Users
+          </NuxtLink>
+          <NuxtLink to="/products" class="nav-link">
+            <span class="nav-emoji">🥐</span>
+            Products
+          </NuxtLink>
+          <NuxtLink to="/about" class="nav-link">
+            <span class="nav-emoji">ℹ️</span>
+            About
+          </NuxtLink>
         </nav>
       </div>
     </div>
@@ -20,10 +37,9 @@
 
 <style scoped>
 .app-header {
-  background-color: #343a40;
-  color: white;
-  padding: 0;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background: white;
+  border-bottom: 1px solid #e9ecef;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .container {
@@ -41,17 +57,26 @@
 
 .logo {
   text-decoration: none;
-  color: white;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+
+.logo:hover {
+  color: #3498db;
+}
+
+.logo-emoji {
+  font-size: 1.5rem;
 }
 
 .logo h1 {
   margin: 0;
-  font-size: 24px;
-  font-weight: 700;
-}
-
-.logo:hover {
-  color: #007bff;
+  font-size: 1.5rem;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
 }
 
 .main-nav {
@@ -60,20 +85,36 @@
 }
 
 .nav-link {
-  color: white;
+  color: #7f8c8d;
   text-decoration: none;
   font-weight: 500;
-  padding: 8px 12px;
-  border-radius: 4px;
-  transition: background-color 0.2s;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 15px;
+  padding: 8px 0;
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.nav-emoji {
+  margin-right: 6px;
 }
 
 .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  color: #2c3e50;
 }
 
 .nav-link.router-link-active {
-  background-color: #007bff;
+  color: #3498db;
+}
+
+.nav-link.router-link-active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #3498db;
 }
 
 @media (max-width: 768px) {
@@ -81,12 +122,17 @@
     flex-direction: column;
     height: auto;
     padding: 15px 0;
+    gap: 15px;
   }
   
   .main-nav {
-    margin-top: 15px;
+    gap: 20px;
     flex-wrap: wrap;
-    gap: 15px;
+    justify-content: center;
+  }
+  
+  .container {
+    padding: 0 15px;
   }
 }
 </style>

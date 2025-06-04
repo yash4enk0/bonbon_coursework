@@ -47,7 +47,7 @@
             <div class="project-info">
               <h2>Project Description</h2>
               <p>
-                This CRUD application is developed as a course project for Web Programming subject. 
+                This CRUD application is developed as a course project for Data Bases subject. 
                 The application demonstrates a complete reference management system built with modern web technologies.
               </p>
               
@@ -84,6 +84,7 @@ useHead({
   title: 'About Author - CRUD Application',
   meta: [
     {
+      key: 'description',
       name: 'description',
       content: 'Information about the author of this CRUD application course project'
     }
@@ -93,8 +94,7 @@ useHead({
 
 <style scoped>
 .main-content {
-  min-height: calc(100vh - 120px);
-  background-color: #f8f9fa;
+  min-height: calc(100vh - 140px);
 }
 
 .about-section {
@@ -102,158 +102,209 @@ useHead({
 }
 
 .container {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 30px;
 }
 
 .about-card {
-  background: white;
-  border-radius: 12px;
-  padding: 40px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 234, 167, 0.9));
+  border-radius: 25px;
+  padding: 50px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+  border: 3px solid #fdcb6e;
 }
 
 .author-info {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 }
 
 .avatar {
-  width: 100px;
-  height: 100px;
-  background: linear-gradient(135deg, #007bff, #0056b3);
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, #74b9ff, #0984e3);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 20px;
-  box-shadow: 0 4px 15px rgba(0,123,255,0.3);
+  margin: 0 auto 25px;
+  box-shadow: 0 8px 25px rgba(116, 185, 255, 0.4);
+  border: 4px solid #ffeaa7;
 }
 
 .initials {
   color: white;
-  font-size: 36px;
+  font-size: 2.5rem;
   font-weight: 700;
+  font-family: 'Playfair Display SC', serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .author-info h1 {
   margin: 0;
-  color: #333;
-  font-size: 2.5rem;
+  color: #2d3436;
+  font-size: 2.8rem;
+  font-family: 'Playfair Display SC', serif;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
 }
 
 .info-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 25px;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 }
 
 .info-item {
-  background: #f8f9fa;
-  padding: 20px;
-  border-radius: 8px;
-  border-left: 4px solid #007bff;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(250, 177, 160, 0.3));
+  padding: 25px;
+  border-radius: 20px;
+  border-left: 6px solid #74b9ff;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.info-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(116, 185, 255, 0.2);
 }
 
 .info-item h3 {
-  margin: 0 0 10px 0;
-  color: #007bff;
-  font-size: 1.1rem;
-  font-weight: 600;
+  margin: 0 0 12px 0;
+  color: #74b9ff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: 'Playfair Display SC', serif;
 }
 
 .info-item p {
   margin: 0;
-  color: #333;
-  font-size: 1rem;
-  font-weight: 500;
+  color: #2d3436;
+  font-size: 1.1rem;
+  font-weight: bold;
+  font-family: 'VT323', monospace;
 }
 
 .project-info {
-  border-top: 1px solid #e9ecef;
-  padding-top: 30px;
+  border-top: 3px solid #fab1a0;
+  padding-top: 40px;
 }
 
 .project-info h2 {
-  color: #333;
-  margin-bottom: 15px;
-  font-size: 1.8rem;
+  color: #2d3436;
+  margin-bottom: 20px;
+  font-size: 2.2rem;
+  font-family: 'Playfair Display SC', serif;
+  font-weight: 700;
+  text-align: center;
 }
 
 .project-info h3 {
-  color: #007bff;
-  margin: 25px 0 15px 0;
-  font-size: 1.3rem;
+  color: #74b9ff;
+  margin: 30px 0 20px 0;
+  font-size: 1.5rem;
+  font-family: 'Playfair Display SC', serif;
+  font-weight: 700;
 }
 
 .project-info p {
-  color: #666;
-  line-height: 1.7;
-  margin-bottom: 20px;
+  color: #636e72;
+  line-height: 1.8;
+  margin-bottom: 25px;
+  font-family: 'VT323', monospace;
+  font-size: 1.1rem;
 }
 
 .tech-stack {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 25px;
+  gap: 15px;
+  margin-bottom: 30px;
+  justify-content: center;
 }
 
 .tech-badge {
-  background: #007bff;
+  background: linear-gradient(135deg, #74b9ff, #0984e3);
   color: white;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: 'VT323', monospace;
+  box-shadow: 0 4px 15px rgba(116, 185, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.tech-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(116, 185, 255, 0.4);
 }
 
 .features-list {
-  color: #666;
-  line-height: 1.7;
+  color: #636e72;
+  line-height: 1.8;
+  font-family: 'VT323', monospace;
+  font-size: 1.1rem;
 }
 
 .features-list li {
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  padding-left: 10px;
+  position: relative;
+}
+
+.features-list li::before {
+  content: '🍞';
+  position: absolute;
+  left: -20px;
+  font-size: 1rem;
 }
 
 @media (max-width: 768px) {
   .about-card {
-    padding: 25px;
+    padding: 30px 25px;
   }
   
   .author-info h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
   
   .info-grid {
     grid-template-columns: 1fr;
-    gap: 15px;
+    gap: 20px;
   }
   
   .avatar {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
   }
   
   .initials {
-    font-size: 28px;
+    font-size: 2rem;
+  }
+  
+  .container {
+    padding: 0 20px;
   }
 }
 
 @media (max-width: 480px) {
-  .container {
-    padding: 0 15px;
-  }
-  
   .about-card {
-    padding: 20px;
+    padding: 25px 20px;
   }
   
   .tech-stack {
     justify-content: center;
+  }
+  
+  .project-info h2 {
+    font-size: 1.8rem;
+  }
+  
+  .project-info h3 {
+    font-size: 1.3rem;
   }
 }
 </style>

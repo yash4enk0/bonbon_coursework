@@ -13,6 +13,7 @@ useHead({
   title: 'Category Management - CRUD Application',
   meta: [
     {
+      key: 'description',
       name: 'description',
       content: 'Manage product categories'
     }
@@ -22,7 +23,6 @@ useHead({
 
 <style scoped>
 .main-content {
-  min-height: calc(100vh - 120px);
-  background-color: #f8f9fa;
+  min-height: calc(100vh - 140px);
 }
 </style>

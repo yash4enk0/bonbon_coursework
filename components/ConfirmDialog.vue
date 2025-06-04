@@ -1,8 +1,11 @@
 <template>
-  <div class="modal-overlay">
+  <div class="modal-overlay" @click.self="$emit('cancel')">
     <div class="modal confirm-modal">
       <div class="modal-header">
-        <h3>{{ title }}</h3>
+        <h3>
+          <span class="modal-emoji">⚠️</span>
+          {{ title }}
+        </h3>
       </div>
       
       <div class="modal-body">
@@ -13,8 +16,8 @@
         <button @click="$emit('cancel')" class="btn btn-secondary">
           Cancel
         </button>
-        <button @click="$emit('confirm')" class="btn btn-danger">
-          Confirm
+        <button @click="$emit('confirm')" class="btn btn-delete">
+          🗑️ Delete
         </button>
       </div>
     </div>
@@ -37,250 +40,115 @@ defineEmits(['confirm', 'cancel'])
 </script>
 
 <style scoped>
-.category-list {
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
-.header h2 {
-  margin: 0;
-  color: #333;
-}
-
-.btn {
-  padding: 10px 16px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.2s;
-}
-
-.btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.btn-primary {
-  background-color: #007bff;
-  color: white;
-}
-
-.btn-primary:hover:not(:disabled) {
-  background-color: #0056b3;
-}
-
-.btn-secondary {
-  background-color: #6c757d;
-  color: white;
-}
-
-.btn-secondary:hover {
-  background-color: #545b62;
-}
-
-.btn-danger {
-  background-color: #dc3545;
-  color: white;
-}
-
-.btn-danger:hover {
-  background-color: #c82333;
-}
-
-.categories-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-}
-
-.category-card {
-  background: white;
-  border: 1px solid #e9ecef;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: box-shadow 0.2s;
-}
-
-.category-card:hover {
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
-
-.category-info h3 {
-  margin: 0 0 8px 0;
-  color: #333;
-}
-
-.category-id {
-  color: #6c757d;
-  font-size: 12px;
-  margin: 0 0 15px 0;
-}
-
-.category-actions {
-  display: flex;
-  gap: 10px;
-}
-
-.category-actions .btn {
-  flex: 1;
-  padding: 8px 12px;
-  font-size: 13px;
-}
-
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(45, 52, 54, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  backdrop-filter: blur(5px);
 }
 
 .modal {
-  background: white;
-  border-radius: 8px;
+  background: linear-gradient(135deg, #fff, #ffeaa7);
+  border-radius: 25px;
+  border: 3px solid #fdcb6e;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.confirm-modal {
   min-width: 400px;
   max-width: 500px;
-  max-height: 90vh;
-  overflow-y: auto;
 }
 
 .modal-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 20px 20px 0;
-  border-bottom: 1px solid #e9ecef;
-  margin-bottom: 20px;
+  padding: 25px 30px 0;
+  border-bottom: 2px solid #fab1a0;
+  margin-bottom: 25px;
 }
 
 .modal-header h3 {
   margin: 0;
-  color: #333;
-}
-
-.close-btn {
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: #6c757d;
-  padding: 0;
-  width: 30px;
-  height: 30px;
+  color: #2d3436;
+  font-family: 'Playfair Display SC', serif;
+  font-size: 1.5rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 10px;
 }
 
-.close-btn:hover {
-  color: #333;
+.modal-emoji {
+  font-size: 1.3rem;
 }
 
 .modal-body {
-  padding: 0 20px 20px;
+  padding: 0 30px 25px;
+}
+
+.modal-body p {
+  margin: 0;
+  color: #2d3436;
+  line-height: 1.6;
+  font-size: 1.1rem;
+  font-family: 'VT323', monospace;
+  text-align: center;
 }
 
 .modal-footer {
-  padding: 20px;
-  border-top: 1px solid #e9ecef;
+  padding: 25px 30px;
+  border-top: 2px solid #fab1a0;
   display: flex;
-  gap: 10px;
+  gap: 15px;
   justify-content: flex-end;
 }
 
-.form-group {
-  margin-bottom: 20px;
+.btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'VT323', monospace;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.form-group label {
-  display: block;
-  margin-bottom: 6px;
-  font-weight: 500;
-  color: #333;
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
-.form-group input {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
-  font-size: 14px;
-  transition: border-color 0.2s;
+.btn-secondary {
+  background: linear-gradient(135deg, #ddd, #bbb);
+  color: #2d3436;
 }
 
-.form-group input:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+.btn-delete {
+  background: linear-gradient(135deg, #ff7675, #e17055);
+  color: white;
 }
 
-.form-group input.error {
-  border-color: #dc3545;
-}
-
-.field-error {
-  color: #dc3545;
-  font-size: 12px;
-  margin-top: 4px;
-}
-
-.form-actions {
-  display: flex;
-  gap: 10px;
-  justify-content: flex-end;
-  margin-top: 30px;
-}
-
-.loading {
-  text-align: center;
-  padding: 40px;
-  color: #6c757d;
-}
-
-.empty-state {
-  text-align: center;
-  padding: 40px;
-  color: #6c757d;
-  background: #f8f9fa;
-  border-radius: 8px;
-}
-
-.error-message {
-  background-color: #f8d7da;
-  color: #721c24;
-  padding: 12px;
-  border-radius: 4px;
-  margin-top: 20px;
-  border: 1px solid #f5c6cb;
-}
-
-.confirm-modal {
-  min-width: 350px;
-}
-
-.confirm-modal .modal-body {
-  padding: 20px;
-}
-
-.confirm-modal .modal-body p {
-  margin: 0;
-  color: #333;
-  line-height: 1.5;
+@media (max-width: 768px) {
+  .confirm-modal {
+    min-width: 90vw;
+    margin: 20px;
+  }
+  
+  .modal-footer {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 </style>
