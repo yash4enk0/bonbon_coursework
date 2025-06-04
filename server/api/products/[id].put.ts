@@ -4,8 +4,16 @@ const prisma = new PrismaClient()
 
 export default defineEventHandler(async (event) => {
   try {
+    const id = getRouterParam(event, 'id')
     const body = await readBody(event)
     
+    if (!id || isNaN(parseInt(id))) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: 'Invalid product ID'
+      })
+    }
+
     if (!body.name || body.name.trim() === '') {
       throw createError({
         statusCode: 400,
@@ -45,7 +53,7 @@ export default defineEventHandler(async (event) => {
       })
     }
 
-    const productData = {
+    const updateData = {
       name: body.name.trim(),
       article: body.article.trim().toUpperCase(),
       description: body.description ? body.description.trim() : null,
@@ -54,13 +62,29 @@ export default defineEventHandler(async (event) => {
       categoryId: parseInt(body.categoryId)
     }
 
-    const product = await prisma.product.create({
-      data: productData,
+    const product = await prisma.product.update({
+      where: {
+        id: parseInt(id)
+      },
+      data: updateData,
       include: {
         category: {
           select: {
             id: true,
             name: true
+          }
+        },
+        photos: {
+          select: {
+            id: true,
+            filePath: true,
+            caption: true
+          }
+        },
+        _count: {
+          select: {
+            orderItems: true,
+            reviews: true
           }
         }
       }
@@ -75,13 +99,20 @@ export default defineEventHandler(async (event) => {
       availability: product.availability,
       categoryId: product.categoryId,
       categoryName: product.category.name,
-      photos: [],
-      orderCount: 0,
-      reviewCount: 0
+      photos: product.photos,
+      orderCount: product._count.orderItems,
+      reviewCount: product._count.reviews
     }
 
     return formattedProduct
   } catch (error: any) {
+    if (error.code === 'P2025') {
+      throw createError({
+        statusCode: 404,
+        statusMessage: 'Product not found'
+      })
+    }
+
     if (error.code === 'P2002') {
       throw createError({
         statusCode: 409,
@@ -95,14 +126,14 @@ export default defineEventHandler(async (event) => {
         statusMessage: 'Invalid category selected'
       })
     }
-    
+
     if (error.statusCode) {
       throw error
     }
     
     throw createError({
       statusCode: 500,
-      statusMessage: 'Failed to create product'
+      statusMessage: 'Failed to update product'
     })
   }
 })
